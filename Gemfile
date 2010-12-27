@@ -5,7 +5,33 @@ gem 'rails', '3.0.3'
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
-gem 'sqlite3-ruby', :require => 'sqlite3'
+gem 'mysql', :require => 'mysql'
+gem 'haml'
+gem 'linecache19'
+gem 'ruby-debug19'
+gem 'sass'
+gem 'ruby-openid', :require => 'openid'
+gem "rack-openid"
+gem "ruby-openid-apps-discovery"
+gem 'crudspec'
+
+group :test do
+  gem 'capybara'
+  gem 'database_cleaner'
+  gem 'cucumber-rails'
+  gem 'rspec-rails', "~>2.2.0"
+  gem 'autotest'
+  gem 'autotest-rails'
+  gem 'faker'
+  gem 'autotest-growl'
+  gem 'launchy'
+  gem 'rcov'
+  gem 'webrat'
+  gem 'pickle'
+  gem 'spork'
+  gem 'fabrication'
+end
+
 
 # Use unicorn as the web server
 # gem 'unicorn'

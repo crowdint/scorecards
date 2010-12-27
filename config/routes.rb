@@ -1,4 +1,13 @@
 Scorecards::Application.routes.draw do
+  root :to => "welcome#index"
+  match "/fail" => "welcome#index", :as => "fail"
+  match "/login" => "sessions#create", :as => 'login', :via => :get
+  match "/logout" => "sessions#delete", :as => 'logout', :via => :get
+
+
+
+#  get "welcome/index"
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
@@ -48,7 +57,7 @@ Scorecards::Application.routes.draw do
 
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
-  # root :to => "welcome#index"
+
 
   # See how all your routes lay out with "rake routes"
 

@@ -1,0 +1,5 @@
+<h1>Welcome#index</h1>
+<p>Find me in app/views/welcome/index.html.erb</p>
+User <%= @current_user.nil? ? 'no current user present' : @current_user.mail %>
+<%= link_to "logout", logout_path %>
+<%= link_to "log in", login_path %>

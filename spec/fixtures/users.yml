@@ -1,0 +1,8 @@
+admin:
+  mail: pp@cr.com
+  is_admin: true
+  active: true
+no_admin:
+  mail: pc@cr.com
+  is_admin: false
+  active: false

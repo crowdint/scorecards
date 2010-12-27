@@ -3,7 +3,8 @@ Scorecards::Application.routes.draw do
   match "/fail" => "welcome#index", :as => "fail"
   match "/login" => "sessions#create", :as => 'login', :via => :get
   match "/logout" => "sessions#delete", :as => 'logout', :via => :get
-
+  match "/users" => "users#index", :as => "users", :via => :get
+  resources :users
 
 
 #  get "welcome/index"

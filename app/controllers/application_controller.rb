@@ -1,7 +1,11 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
   before_filter :get_current_user
-  
+
+   def require_login
+    redirect_to root_path if current_user.nil?
+  end
+
   def get_current_user
     @current_user = current_user
   end

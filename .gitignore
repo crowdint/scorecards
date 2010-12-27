@@ -1,4 +1,6 @@
 .bundle
+Gemfile.lock
+.idea/*.*
 db/*.sqlite3
 log/*.log
 tmp/**/*

@@ -1,1 +1,20 @@
-%h1 Users Index
+%h1 Users!
+= link_to "Add new",new_user_path
+%table{}
+  %thead
+    %tr
+      %th User
+      %th Admin?
+      %th
+      %th
+  %tbody
+    -@users.each do |user|
+      %tr
+        %td
+          = user.mail
+        %td
+          = user.is_admin
+        %td
+          = link_to 'Edit', edit_user_url(user)
+        %td
+          = link_to "Destroy",  user, :confirm => "Are you sure?", :method => :delete

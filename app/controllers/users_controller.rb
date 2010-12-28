@@ -2,11 +2,7 @@ class UsersController < ApplicationController
 #  before_filter :require_login
 
   def index
-    @users = User.all
-  end
-
-  def show
-    @user = User.where(:id => params[:id]).first
+    @users = User.where(:active => true)
   end
 
   def new
@@ -14,10 +10,10 @@ class UsersController < ApplicationController
   end
 
   def create
-    @user = User.new(params)
+    @user = User.new(params[:user])
     if @user.save
       flash[:notice] = "User was successfully created."
-      redirect_to user_path(@user)
+      redirect_to users_path
     else
       flash[:notice] = "the user couldn't been created"
       flash[:errors] = @user.errors
@@ -33,7 +29,7 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     if @user.update_attributes(params[:user])
        flash[:notice] = "User was successfully updated."
-      redirect_to user_path(@user)
+      redirect_to users_path
     else
       flash[:notice] = "the user couldn't been updated"
       flash[:errors] = @user.errors

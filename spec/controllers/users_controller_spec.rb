@@ -23,28 +23,7 @@ end
       response.should render_template('index')
     end
   end
-  
-  describe "GET 'show'" do
-    before(:each) do
-      # Replace this with your Mock Factory, for ex: Machinist, Fabrication...
-      @user = users(:admin)
-    end
 
-    it 'is successful' do
-      get :show, :id => @user.id
-      response.should be_success
-    end
-
-    it "assigns @user" do
-      get :show, :id => @user.id
-      assigns(:user).should_not be_nil
-    end
-
-    it "renders the 'show' template" do
-      get :show, :id => @user.id
-      response.should render_template('show')
-    end
-  end  
   describe "GET 'new'" do
     it 'is successful' do
       get :new
@@ -73,9 +52,9 @@ end
         @user.should_receive(:save).and_return(true)
       end
 
-      it "redirects to the 'show' action" do
+      it "redirects to the 'index' action" do
         post :create, :user => @user.attributes
-        response.should redirect_to(user_path(@user)) # Put the right show path here
+        response.should redirect_to(users_path) # Put the right show path here
       end
 
       it "sets a flash message" do
@@ -136,7 +115,7 @@ end
 
       it "redirects to 'show' action" do
         put :update, :id => @user.id
-        response.should redirect_to(user_path(@user)) # Put the right show path here
+        response.should redirect_to(users_path) # Put the right show path here
       end
 
       it "sets a flash message" do

@@ -1,0 +1,23 @@
+%h1 Edir Profile
+
+
+-form_for [@user, @profile] do |f|
+  = render "shared/error_messages", :target => @profile
+  = yield
+  %p
+    %label{:for => "Avatar"} Gravatar url
+    %br
+    = f.text_field :avatar
+  %p
+    %label{:for => "name"} Name
+    %br
+    = f.text_field :name
+  %p
+    %label{:for => "description"} Description
+    %br
+    = f.text_area :description
+
+  %p
+    = submit_tag 'Update'
+
+= link_to 'Back', users_path

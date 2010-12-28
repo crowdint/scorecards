@@ -1,0 +1,7 @@
+#header
+  %h2
+    = @current_user.nil? ? "Please" : "#{@current_user.mail}"
+    = user_login(@current_user)
+  =link_to 'Users', users_path
+  %span 
+  =link_to 'Skills', skills_path

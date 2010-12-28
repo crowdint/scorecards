@@ -1,0 +1,21 @@
+%h1 Skills
+
+=link_to 'New Skill', new_skill_path
+%table
+  %thead
+    %tr
+      %th Skill
+      %th Description
+      %th
+      %th
+  %tbody
+    -@skills.each do |skill|
+      %tr
+        %td
+          = skill.name
+        %td
+          = skill.description
+        %td
+          = link_to "Edit",edit_skill_path(skill)
+        %td
+          = link_to "Delete",  skill, :confirm => "Are you sure?", :method => :delete

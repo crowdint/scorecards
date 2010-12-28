@@ -1,0 +1,11 @@
+%h1 User Profile
+=link_to "edit",edit_user_profile_path(@user,@profile)
+%h2
+  = @profile.name
+
+%img{:src =>"#{@profile.avatar}"}
+%br
+%p
+  =@profile.description
+
+= link_to 'Back', users_path

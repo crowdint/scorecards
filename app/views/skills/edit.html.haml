@@ -1,0 +1,17 @@
+%h1 Edit Skill
+
+-form_for @skill do |f|
+  = render "shared/error_messages", :target => @skill
+  = yield
+  %p
+    %label{:for => "name"} Name
+    %br
+    = f.text_field :name
+  %p
+    %label{:for => "description"} Description
+    %br
+    = f.text_field :description
+  %p
+    = submit_tag 'Update'
+
+= link_to 'Back', skills_path

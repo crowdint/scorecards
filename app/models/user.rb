@@ -1,4 +1,6 @@
 class User < ActiveRecord::Base
+  has_one :profile, :dependent => :destroy
+  
   def admin
     self.is_admin?
   end

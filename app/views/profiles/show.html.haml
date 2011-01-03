@@ -7,5 +7,17 @@
 %br
 %p
   =@profile.description
-
+%p
+  %table
+    %thead
+      %tr
+        %th Skill
+        %th Grade
+    %tbody
+      -@profile.profile_skills.each do |skill|
+        %tr
+          %td
+            = skill.name
+          %td
+            = skill.grade
 = link_to 'Back', users_path

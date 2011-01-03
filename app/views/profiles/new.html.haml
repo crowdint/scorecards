@@ -16,6 +16,20 @@
     %label{:for => "description"} Description
     %br
     = f.text_area :description
+  %p
+    %table
+      %thead
+        %tr
+          %th Skill
+          %th Grade
+      %tbody
+        - @skills.each do |skill|
+          %tr
+            %td
+              = skill.name
+            %td
+              - (1..5).each do |num|
+                = radio_button_tag "skills[#{skill.id}]", num
 
   %p
     = submit_tag 'Create'

@@ -1,0 +1,20 @@
+%div
+  %div
+    = profile.name
+    %br
+    %img{:src =>"#{profile.avatar}"}
+  %div
+    %h1 Knowledge
+    %ul
+    - profile.profile_skills.knowledge.each do |profile_skill|
+      %li
+        = profile_skill.skill.name
+  %div
+    %h1 Expertise
+    %ul
+    - profile.profile_skills.expertise.each do |profile_skill|
+      %li
+        = profile_skill.skill.name
+  %div
+    %p
+      = profile.description

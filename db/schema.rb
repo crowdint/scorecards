@@ -10,7 +10,15 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101228191831) do
+ActiveRecord::Schema.define(:version => 20101230170350) do
+
+  create_table "profile_skills", :force => true do |t|
+    t.integer  "profile_id"
+    t.integer  "skill_id"
+    t.integer  "grade"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "profiles", :force => true do |t|
     t.integer  "user_id"

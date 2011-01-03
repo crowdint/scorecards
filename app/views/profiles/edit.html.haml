@@ -16,6 +16,23 @@
     %label{:for => "description"} Description
     %br
     = f.text_area :description
+  %p
+    %table
+      %thead
+        %tr
+          %th Skill
+          %th Grade
+          %th
+      %tbody
+        - @skills.each do |skill|
+          %tr
+            %td
+              = skill.name
+            %td
+              - (1..5).each do |num|
+                = radio_button_tag "skills[#{skill.id}]", num, check_radio_skills(@profile,skill,num)
+            %td
+              = link_to "Remove", profile_delete_skill_path(@user, @profile, skill.id), :confirm => "Are you sure?"
 
   %p
     = submit_tag 'Update'

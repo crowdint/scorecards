@@ -3,9 +3,9 @@ require 'spec_helper'
 describe ProfilesController do
   fixtures :all
 
-before do
-  @user = users(:admin)
-end
+  before do
+    @user = users(:admin)
+  end
   describe "GET 'show'" do
     before(:each) do
       # Replace this with your Mock Factory, for ex: Machinist, Fabrication...
@@ -26,7 +26,7 @@ end
       get :show, :user_id => @user.id, :id => @profile.id
       response.should render_template('show')
     end
-  end  
+  end
   describe "GET 'new'" do
     it 'is successful' do
       get :new, :user_id => @user.id
@@ -43,7 +43,7 @@ end
       get :new, :user_id => @user.id
       response.should render_template('new')
     end
-  end  
+  end
   describe "POST 'create'" do
     before(:each) do
       @profile = Profile.new
@@ -88,7 +88,7 @@ end
         flash[:notice].should == 'Profile could not been created.'
       end
     end
-  end  
+  end
   describe "GET 'edit'" do
     before(:each) do
       # Replace this with your Mock Factory, for ex: Machinist, Fabrication...
@@ -109,7 +109,7 @@ end
       get :edit, :user_id => @user.id, :id => @profile.id
       response.should render_template('edit')
     end
-  end  
+  end
   describe "PUT 'update'" do
     before(:each) do
       # Replace this with your Mock Factory, for ex: Machinist, Fabrication...
@@ -148,6 +148,58 @@ end
         put :update, :user_id => @user.id, :id => @profile.id, :profile => {} # Add here some attributes for the model
         assigns(:profile).should_not be_nil
       end
+    end
+  end
+  context "skills" do
+    before :each do
+      @skill        = Skill.first
+      @profile      = Profile.first
+      @user.profile = @profile
+      @user.save
+    end
+
+    describe "Add skill to profile" do
+      it "should add new skill to profile" do
+        lambda {
+          lambda {
+            put :update, :user_id => @user.id, :id => @profile.id, :profile => {}, :skills => {@skill.id => 3}
+          }.should change(ProfileSkill, :count).by(1)
+        }.should_not change(Skill, :count)
+        new_skill = ProfileSkill.where(:profile_id => @profile.id, :skill_id => @skill.id).first
+        new_skill.grade.should == 3
+      end
+    end
+
+    describe "update skill from profile" do
+      before do
+        ProfileSkill.create(:profile => @profile, :skill => @skill, :grade => 3)
+      end
+      it "should update profile skill" do
+        lambda {
+          lambda {
+            put :update, :user_id => @user.id, :id => @profile.id, :profile => {}, :skills => {@skill.id => 3}
+          }.should_not change(ProfileSkill, :count)
+        }.should_not change(Skill, :count)
+        new_skill = ProfileSkill.where(:profile_id => @profile.id, :skill_id => @skill.id).first
+        new_skill.grade.should == 3
+      end
+    end
+
+    describe "remove skill from profile" do
+      before do
+        ProfileSkill.create(:profile => @profile, :skill => @skill, :grade => 3)
+      end
+      it "should be able to remove skills relationship"do
+        post :delete_skill, :user_id => @user.id, :profile_id => @profile.id, :skill_id => @skill.id
+        removed_skill = ProfileSkill.where(:profile_id => @profile.id, :skill_id => @skill.id).first
+        removed_skill.should be_nil
+      end
+      it "should not remove skill from Skill" do
+        post :delete_skill, :user_id => @user.id, :profile_id => @profile.id, :skill_id => @skill.id
+        skill = Skill.where(:id => @skill.id)
+        skill.should_not be_nil
+      end
+
     end
   end
 end

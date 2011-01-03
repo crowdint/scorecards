@@ -28,14 +28,14 @@ class ApplicationController < ActionController::Base
   def current_user
     current_user = nil
     begin
-      current_user = User.where(:id => session[:user_id]).first
+      current_user = User.where(:id => session[:current_id]).first
     rescue => e
     end
     current_user
   end
 
   def current_user=(new_user)
-    session[:user_id] = new_user.nil? ? 0 : new_user.id
+    session[:current_id] = new_user.nil? ? 0 : new_user.id
   end
 
 end

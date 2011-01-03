@@ -4,7 +4,9 @@ Scorecards::Application.routes.draw do
   match "/login" => "sessions#create", :as => 'login', :via => :get
   match "/logout" => "sessions#delete", :as => 'logout', :via => :get
   resources :users do
-    resources :profiles
+    resources :profiles do
+      match 'delete_skill(/:skill_id)' => 'profiles#delete_skill' , :as => 'delete_skill'
+    end
   end
   resources :skills
 #  match "/users" => "users#index", :as => "users", :via => :get

@@ -1,4 +1,5 @@
 admin:
+  id: 1
   mail: pp@cr.com
   is_admin: true
   active: true

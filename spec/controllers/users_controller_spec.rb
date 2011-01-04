@@ -2,13 +2,13 @@ require 'spec_helper'
 
 describe UsersController do
   fixtures :users
-before(:all) do
-  @user = User.first
-  current_user = @user
-end
-
+  before :each do
+    session[:current_id] = User.first
+  end
   describe "GET 'index'" do
+
     it "is successful" do
+#      ApplicationController.stub!(:current_user).and_return(User.first)
       get :index
       response.should be_success
     end
@@ -39,7 +39,7 @@ end
       get :new
       response.should render_template('new')
     end
-  end  
+  end
   describe "POST 'create'" do
     before(:each) do
       @user = User.new
@@ -79,7 +79,7 @@ end
         assigns(:user).should_not be_nil
       end
     end
-  end  
+  end
   describe "GET 'edit'" do
     before(:each) do
       # Replace this with your Mock Factory, for ex: Machinist, Fabrication...
@@ -100,7 +100,7 @@ end
       get :edit, :id => @user.id
       response.should render_template('edit')
     end
-  end  
+  end
   describe "PUT 'update'" do
     before(:each) do
       # Replace this with your Mock Factory, for ex: Machinist, Fabrication...
@@ -140,7 +140,7 @@ end
         assigns(:user).should_not be_nil
       end
     end
-  end  
+  end
   describe "DELETE 'destroy'" do
     before(:each) do
       # Replace this with your Mock Factory, for ex: Machinist, Fabrication...

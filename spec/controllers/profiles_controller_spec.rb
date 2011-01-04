@@ -5,6 +5,7 @@ describe ProfilesController do
 
   before do
     @user = users(:admin)
+    session[:current_id] = User.first
   end
   describe "GET 'show'" do
     before(:each) do

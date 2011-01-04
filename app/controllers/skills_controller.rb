@@ -1,4 +1,5 @@
 class SkillsController < ApplicationController
+  before_filter :require_login
 
   def index
     @skills = Skill.all

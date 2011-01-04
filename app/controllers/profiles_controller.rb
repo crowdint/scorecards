@@ -1,4 +1,5 @@
 class ProfilesController < ApplicationController
+  before_filter :require_login
 
   def new
     @user = User.find(params[:user_id])
@@ -12,7 +13,7 @@ class ProfilesController < ApplicationController
   end
 
   def create
-    @user = params[:user_id]
+    @user = User.find(params[:user_id])
     @profile = Profile.new(params[:profile].merge(:user_id => params[:user_id]))
     if @profile.save
       @profile.save_skills(params) unless params[:skills].blank?
@@ -31,7 +32,7 @@ class ProfilesController < ApplicationController
   end
 
   def update
-    @user = params[:user_id]
+    @user = User.find(params[:user_id])
     @profile = Profile.find(params[:id])
     if @profile.update_attributes(params[:profile])
       @profile.update_skills(params) unless params[:skills].blank?

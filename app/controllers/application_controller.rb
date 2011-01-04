@@ -2,8 +2,11 @@ class ApplicationController < ActionController::Base
   protect_from_forgery
   before_filter :get_current_user
 
-   def require_login
-    redirect_to root_path if current_user.nil?
+  def require_login
+    if current_user.nil?
+      flash[:notice] = "You must be logged in"
+      redirect_to root_path
+    end
   end
 
   def get_current_user

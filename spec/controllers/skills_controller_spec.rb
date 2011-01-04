@@ -2,7 +2,9 @@ require 'spec_helper'
 
 describe SkillsController do
   fixtures :skills
-
+  before :each do
+    session[:current_id] = User.first
+  end
   describe "GET 'index'" do
     it "is successful" do
       get :index

@@ -7,8 +7,8 @@ gem 'rails', '3.0.3'
 
 gem 'mysql', :require => 'mysql'
 gem 'haml'
-gem 'linecache19'
-gem 'ruby-debug19'
+gem 'linecache'
+gem 'ruby-debug'
 gem 'sass'
 gem 'ruby-openid', :require => 'openid'
 gem "rack-openid"
